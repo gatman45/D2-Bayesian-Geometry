@@ -5,6 +5,16 @@
 
 ---
 
+## Highlights
+
+![Empirical Spectral Density](results/esd_comparison.png)
+*Empirical Spectral Density (ESD) of weight matrices: biologically-critical SNN (blue) vs GPT-2 / DistilGPT-2 (orange). Clear heavy-tailed behavior visible.*
+
+![Spectral Gap](results/spectral_gap.png)
+*New discovery: Spectral gap Δα_w ≈ 0.98 between biological criticality and modern LLMs.*
+
+---
+
 ## Summary
 
 This repository contains all reproducible code, simulations, and results for the D2 paper.
