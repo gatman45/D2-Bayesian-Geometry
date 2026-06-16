@@ -581,3 +581,245 @@ This project proves that **biological neural networks at criticality** are spect
 **Start here**: `python D2_COMPLETE_GUIDE.py`
 
 **Last updated**: 2026-06-13
+
+
+====================================================================
+D2 SPECTRAL / PSEUDOSPECTRAL DYNAMICS PROJECT — FULL CONSOLIDATED DOC
+====================================================================
+
+1. GLOBAL POSITIONING
+---------------------
+
+Title:
+Non-Normal Amplification and Pseudo-Critical Dynamics in High-Dimensional Recurrent Systems
+
+Core claim:
+The asymptotic phase transition in recurrent neural networks is governed by the spectral radius (DMFT), while non-normality introduces a transient amplification layer that modifies early-time observables without shifting the true critical point.
+
+This is NOT a new phase transition theory.
+This IS a decomposition of dynamics into:
+  (1) spectral asymptotic regime
+  (2) pseudospectral transient regime
+
+====================================================================
+
+2. FINAL SCIENTIFIC ARCHITECTURE
+---------------------------------
+
+Layer 1 — DMFT baseline
+- spectral radius ρ(W)
+- theoretical critical point: g_DMFT = 1 / ρ(W)
+
+Layer 2 — Non-normality
+- Henrici measure: ||WᵀW - WWᵀ||_F / ||W||_F²
+- transient growth: max_t ||x(t)|| / ||x(0)|| - 1
+- Jacobian amplification
+
+Layer 3 — Pseudospectrum (corrected)
+- resolvent integral over contour |z| = 1 + ε
+- NOT max norm (avoids divergence)
+- Kreiss constant (correct form):
+  K = sup_{ε>0} ε * sup_{|z|=1+ε} ||(zI - W)^(-1)||
+
+Layer 4 — Dynamics
+- Lyapunov exponent (Benettin method)
+- FTLE variance
+- autocorrelation decay
+- early warning signals
+
+Layer 5 — Causal analysis
+- per-N stratified regression
+- permutation tests
+- control of ρ(W)
+- elimination of confounds (N scaling, seed bias)
+
+====================================================================
+
+3. CLEAN RESULTS SUMMARY (VALIDATED)
+-------------------------------------
+
+3.1 DMFT invariance (strong result)
+- g_c ≈ 1 / ρ(W)
+- invariant under matrix structure (gaussian / block / triangular)
+- Δg ~ O(10^-3) after correction
+
+3.2 Non-normality NOT causal for g_c shift
+- Henrici ⟂ Δg (per-N: non-significant)
+- causal_score ≤ 0.13 (noise level)
+- structure effect eliminated under ρ control
+
+3.3 Real non-normal effect (transient only)
+- transient growth ≈ +5% gaussian vs symmetric
+- pseudospectrum integral ×3–×5 separation
+- early-time amplification real but limited
+
+3.4 Early-warning distortion
+- variance / autocorrelation biased near transition
+- does NOT change asymptotic transition
+
+====================================================================
+
+4. CRITICAL LIMITATIONS (IMPORTANT FOR REVIEWERS)
+-------------------------------------------------
+
+L1 — sample size
+- many results based on n < 30 effective crossings
+- finite-size noise still present
+
+L2 — pseudospectrum sensitivity
+- requires contour-based integration
+- naive max resolvent diverges or saturates
+
+L3 — FTLE windowing
+- T too small in some experiments
+- underestimation of fluctuations
+
+L4 — γ dependence confound
+- non-normality not fully orthogonalized with ρ scaling in early runs
+
+L5 — circularity risk (resolved)
+- earlier Δg definitions depended on estimated g_c
+- corrected via DMFT reference baseline
+
+====================================================================
+
+5. ROBUST STATISTICAL FINDINGS
+------------------------------
+
+Pooling results:
+
+- H_norm ⟂ Δg : NOT significant (per-N null)
+- structure of W ⟂ Δg : ANOVA/KW null
+- ρ(W) remains dominant predictor of g_c
+- non-normality affects variance of observables, not mean transition
+
+Permutation tests:
+- only ~2/9 survive p<0.05 → consistent with null hypothesis
+
+====================================================================
+
+6. INTERPRETATION (CORE MESSAGE)
+--------------------------------
+
+1. DMFT is correct asymptotically:
+   g_c = 1 / ρ(W)
+
+2. Non-normality does NOT shift the phase transition.
+
+3. Non-normality DOES create:
+   - transient amplification
+   - pseudospectral sensitivity
+   - early-warning distortion
+
+4. Observed Δg variations are finite-size / estimation artifacts.
+
+====================================================================
+
+7. FINAL MODEL (SYNTHESIS)
+--------------------------
+
+Dynamics = spectral core + pseudospectral layer
+
+x_{t+1} = tanh(g W x_t)
+
+Regimes:
+
+- Stable regime (g < g_c)
+- Critical regime (g ≈ g_c)
+- Non-normal pseudo-critical regime (g ≈ g_c but high transient gain)
+
+Key insight:
+Non-normality modulates trajectory geometry, not the asymptotic stability boundary.
+
+====================================================================
+
+8. PAPER STRUCTURE (ARXIV / NEURIPS)
+-------------------------------------
+
+Paper 1 (Main):
+"Non-Normal Amplification and Pseudo-Critical Dynamics in Recurrent Systems"
+
+Sections:
+1. Introduction
+2. DMFT baseline
+3. Non-normal amplification theory
+4. Pseudospectrum formulation
+5. Experiments
+6. Results
+7. Discussion (no causal shift)
+8. Conclusion
+
+Appendix paper:
+- numerical methods
+- resolvent integral
+- Kreiss correction
+- full experimental pipeline
+
+====================================================================
+
+9. FIGURE SET (REQUIRED)
+------------------------
+
+Fig 1: phase diagram (ω vs regimes)
+Fig 2: g_c invariance across structures
+Fig 3: pseudospectrum separation (normal vs non-normal)
+Fig 4: transient growth distribution
+Fig 5: early-warning distortion metrics
+Fig 6: permutation test null result
+
+====================================================================
+
+10. REVIEWER ATTACK MAP + DEFENSE
+----------------------------------
+
+Attack A: “no new theory”
+→ Response: decomposition framework, not new phase law
+
+Attack B: “finite-size artifact”
+→ Response: per-N stratified invariance + convergence shown
+
+Attack C: “pseudospectrum unstable”
+→ Response: contour-integrated resolvent metric (not max norm)
+
+Attack D: “circular definition of g_c”
+→ Response: DMFT baseline used exclusively
+
+Attack E: “non-normality insignificant”
+→ Response: distinguishes mean shift (none) vs transient effects (real)
+
+====================================================================
+
+11. HARDWARE / AI SYSTEM IMPACT
+------------------------------
+
+Relevance to LLM / FastFlowLM / XDNA2:
+
+- stability monitoring for compiled graphs
+- detection of amplification drift in execution graphs
+- CPU vs NPU divergence diagnostics
+- runtime robustness scoring
+
+Not an optimizer — a diagnostic layer.
+
+====================================================================
+
+12. FINAL CONCLUSION
+--------------------
+
+The system confirms:
+
+- DMFT correctly predicts asymptotic criticality.
+- Non-normality does NOT shift phase transition.
+- Non-normality creates a measurable transient amplification regime.
+- Early-warning signals are distorted but not fundamentally changed.
+
+Therefore:
+
+This work does NOT redefine criticality.
+It decomposes critical dynamics into spectral and pseudospectral components.
+
+====================================================================
+END OF DOCUMENT
+====================================================================
+
+
